@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+  <title>Render JS</title>
+</head>
+
+<body>
+  <main class="tela">
+    <!-- <button class="botaoDeLike">
+      <span class="item">Foto</span>
+      <span class="contador">0 Likes</span>
+    </button>
+    <button class="botaoDeLike">
+      <span class="item">Vídeos</span>
+      <span class="contador">0 Likes</span>
+    </button>
+    <button class="botaoDeLike">
+      <span class="item">Posts</span>
+      <span class="contador">0 Likes</span>
+    </button> -->
+  </main>
+
+  <script>
+    // Dados
+    const itens = [
+      {
+        name: 'Fotos',
+        likes: 0
+      },
+      {
+        name: 'Vídeo',
+        likes: 100
+      },
+      {
+        name: 'Posts',
+        likes: 0
+      }
+    ]
+    
+    // ==========
+
+    function handleClick(itrmLike){
+      itens.forEach((currentItem) => {
+        if(itrmLike === currentItem.name) {
+          console.log(itrmLike);
+          currentItem.likes = currentItem.likes + 1;
+        }
+      })
+
+      render();
+    }
+
+    // ==========
+    // Lógica de Renderização
+    const buttonTemplate = function (item) {
+      return `
+        <button class="botaoDeLike" onclick="handleClick('${item.name}')">
+          <span class="item">${item.name}</span>
+          <span class="contador">${item.likes} Likes</span>
+        </button>`
+    };
+
+    function render() {
+      const tela = document.querySelector('.tela');
+
+      tela.innerHTML = itens.map((item) => {
+        return buttonTemplate(item);
+        // return `<button>${item}</button>`;
+      }).join('');
+
+    }
+    render();
+
+  </script>
+
+</body>
+
+</html>
